@@ -35,6 +35,7 @@ Export your OnlyFansAPI key:
 - If not specific time is specified use start of day or end of day (for date range ending date)
 - Pagination: use `limit` and `offset` query params. Check `hasMore` or `_pagination.next_page` in responses.
 - Whenever possible use User-Agent with value: OnlyFansAPI-Skill
+- Try your best to infer schema from the example response of the endpoint. Eg "data.total.total" for earnings scalar value from endpoint.
 
 ## Workflows
 
