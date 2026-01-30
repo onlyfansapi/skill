@@ -31,7 +31,8 @@ Export your OnlyFansAPI key:
 
 - **Base URL:** `https://app.onlyfansapi.com`
 - **Auth header:** `Authorization: Bearer $ONLYFANSAPI_API_KEY`
-- All dates use URL-encoded format: `YYYY-MM-DD+HH%3A00%3A00`
+- All dates use URL-encoded format: `YYYY-MM-DD HH:MM:SS`
+- If not specific time is specified use start of day or end of day (for date range ending date)
 - Pagination: use `limit` and `offset` query params. Check `hasMore` or `_pagination.next_page` in responses.
 
 ## Workflows
