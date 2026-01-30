@@ -1,5 +1,5 @@
 ---
-name: ofapi-skill
+name: onlyfansapi-skill
 description: >-
   Query OnlyFans analytics via the OnlyFansAPI.com platform. Get revenue
   summaries across all models, identify top-performing models, analyze
@@ -8,7 +8,7 @@ description: >-
   breakdowns, tracking link conversions, or free trial link analytics.
 compatibility: Requires curl, jq, and network access to app.onlyfansapi.com
 metadata:
-  author: ofapi
+  author: OnlyFansAPI.com
   version: "1.0"
 allowed-tools: Bash(curl:*) Bash(jq:*) Read
 ---
