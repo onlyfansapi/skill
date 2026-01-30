@@ -1,11 +1,10 @@
 ---
 name: onlyfansapi-skill
 description: >-
-  Query OnlyFans analytics via the OnlyFansAPI.com platform. Get revenue
+  Query OnlyFans data and analytics via the OnlyFansAPI.com platform. Get revenue
   summaries across all models, identify top-performing models, analyze
-  Free Trial and Tracking Link conversion rates, and compare link earnings.
-  Use when users ask about OnlyFans revenue, model performance, earnings
-  breakdowns, tracking link conversions, or free trial link analytics.
+  Free Trial and Tracking Link conversion rates, compare link earnings, and much more!
+  Use when users ask about anything related to OnlyFans.
 compatibility: Requires curl, jq, and network access to app.onlyfansapi.com
 metadata:
   author: OnlyFansAPI.com
