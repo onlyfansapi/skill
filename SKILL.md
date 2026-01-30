@@ -34,6 +34,7 @@ Export your OnlyFansAPI key:
 - All dates use URL-encoded format: `YYYY-MM-DD HH:MM:SS`
 - If not specific time is specified use start of day or end of day (for date range ending date)
 - Pagination: use `limit` and `offset` query params. Check `hasMore` or `_pagination.next_page` in responses.
+- Whenever possible use User-Agent with value: OnlyFansAPI-Skill
 
 ## Workflows
 
