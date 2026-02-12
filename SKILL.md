@@ -16,6 +16,23 @@ allowed-tools: Bash(curl:*) Bash(jq:*) Read
 
 This skill queries the OnlyFansAPI.com platform to answer questions about OnlyFans agency analytics — revenue, model performance, and link conversion metrics.
 
+## Documentation Resources
+
+**Always consult these resources when working with the OnlyFans API:**
+
+- **Full LLM-Friendly Documentation:** <https://docs.onlyfansapi.com/llms-full.txt>
+  - Contains complete API documentation in a format optimized for AI consumption
+  - Use this to look up endpoint details, parameters, response formats, and examples
+
+- **API Reference (Interactive):** <https://docs.onlyfansapi.com/api-reference>
+  - Browse all available endpoints organized by category
+  - Find endpoints for: Chats & Messages, Payouts & Earnings, Fans & Subscribers, Media & Vault, and more
+
+- **Main Documentation Site:** <https://docs.onlyfansapi.com>
+  - Guides, tutorials, webhook documentation, and integration examples
+
+When unsure about an endpoint or feature, **fetch the LLM documentation first** before attempting API calls.
+
 ## Prerequisites
 
 The user must set the environment variable `ONLYFANSAPI_API_KEY` with their API key from <https://app.onlyfansapi.com/api-keys>.
@@ -162,7 +179,28 @@ When querying `GET /api/{account}/statistics/statements/earnings`, the `type` pa
 
 ## When In Doubt
 
-If you are unsure about an endpoint, parameter, response format, or how to accomplish a specific task with the OnlyFans API, consult the official documentation at <https://docs.onlyfansapi.com>. The site contains full API reference details, guides, and examples for all available endpoints. Always check the docs before guessing.
+If you are unsure about an endpoint, parameter, response format, or how to accomplish a specific task with the OnlyFans API:
+
+1. **First, consult the LLM-friendly documentation:**
+   ```bash
+   curl -s "https://docs.onlyfansapi.com/llms-full.txt" | head -n 500
+   ```
+   This contains the complete API documentation in a format optimized for AI consumption.
+
+2. **Browse the API Reference:** <https://docs.onlyfansapi.com/api-reference>
+   - Over 100 endpoints covering most OnlyFans functionality
+   - Organized by category: Account, Chats, Messages, Fans, Media, Payouts, Posts, Statistics, Webhooks, and more
+
+3. **Key API endpoint categories available:**
+   - **Chats & Messages:** List chats, send messages, send mass messages, PPV support
+   - **Payouts & Earnings:** Earning statistics, transaction history, manual withdrawals
+   - **Fans & Subscribers:** List all/active/expired fans, filter by spending, track subscriptions
+   - **Media & Vault:** Upload/download media, manage vault lists
+   - **Tracking & Trial Links:** Create links, track conversions, analyze revenue attribution
+   - **Posts:** Create, schedule, and manage posts
+   - **Statistics:** Earnings, subscribers, profile visitors, and more
+
+Always check the documentation before guessing at endpoint paths or parameters.
 
 ## Error Handling
 
