@@ -36,8 +36,13 @@ For a single account and common period, define:
 - Explain that C includes earnings from established fans, while N and S concern
   new subscriptions. This diagnostic does not measure the acquired cohort's LTV.
 
-For trend views, use closed UTC windows of 30/15/7/3/1 days and display the
-numerator and denominator alongside the ratio. Compare traffic or revenue totals
+For trend views, use closed calendar-day windows of 30/15/7/3/1 days in the requested
+timezone, defaulting to UTC only when none is specified. Use that timezone for all
+window boundaries and date comparisons, including daylight-saving changes, and
+disclose it in results. Convert request boundaries to each endpoint's required time
+basis; if the source's aggregate granularity cannot reproduce the requested local
+days, disclose the coverage limitation. Display the numerator and denominator
+alongside the ratio. Compare traffic or revenue totals
 across unequal window lengths only after normalizing per day. Percent change is
 `(current - baseline) / baseline × 100` for a positive baseline; report the
 absolute change when the baseline is zero. Distinguish a genuine zero from missing

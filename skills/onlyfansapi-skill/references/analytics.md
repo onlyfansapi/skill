@@ -46,24 +46,38 @@ Source: [Get Earnings](https://docs.onlyfansapi.com/api-reference/statistics/get
 
 Both listings return links under `data.list`; follow pagination for the complete set.
 
+Before calculating or ranking spender conversion, verify that the numerator and
+denominator cover the same fan population, reporting period or acquisition cohort,
+and spend-observation window. Use that same measurement contract across links.
+The following formulas apply only after those scopes match:
+
 | Link type | GET path | Name | Subscriber/claim denominator | Spender conversion |
 | --- | --- | --- | --- | --- |
 | Free trial | `/api/{account}/trial-links` | `trialLinkName` | `claimCounts` | `revenue.spendersCount / claimCounts` |
 | Tracking | `/api/{account}/tracking-links` | `campaignName` | `subscribersCount` | `revenue.spendersCount / subscribersCount` |
 
-Multiply the ratio by 100 to display a percentage. Rank by `revenue.total` for
-“made the most money,” and by the calculated ratio for “best subscriber-to-spender
-conversion.” Include the counts so a tiny sample does not look like strong evidence.
+Multiply a valid ratio by 100 to display a percentage. Include the counts so a
+tiny sample does not look like strong evidence. If scopes cannot be reconciled,
+report the raw counts with their sources and time bases, mark conversion N/A,
+and do not rank conversion.
 
 Revenue includes `total`, `spendersCount`, `calculatedAt`, and `isLoading`. Null or
 loading values mean unavailable, not zero. `synchronous=true` on these listing
 endpoints waits for revenue calculation; use it when the customer needs those
 figures now, with appropriate timeouts. It is not an API-wide sync flag.
 
-Link-list `startDate`/`endDate` filters do not establish that cached `revenue.total`
-was earned within that period. Do not label it “last week's revenue” based on those
-filters alone. For period-specific or cohort analysis, select an endpoint that
-explicitly supports that measurement and verify its time basis.
+`claimCounts` and `subscribersCount` come from the live OnlyFans listing;
+`revenue.spendersCount` counts distinct fans with positive stored attributed revenue
+across the link's recorded attribution history, and `revenue.total` is cached
+attributed revenue. Listing `startDate`/`endDate` filters do not scope that enrichment
+to the same period or cohort. `calculatedAt` describes cache freshness, not the
+spending window; `synchronous=true` does not change that measurement scope.
+
+Rank by `revenue.total` for “made the most money” only when its scope matches the
+requested comparison. Otherwise label it cached revenue over recorded attribution
+history and report the requested period ranking as unavailable. For period-specific
+or cohort analysis, verify that a documented endpoint supports the required
+measurement; do not infer support from a date filter alone.
 
 Attribution also accounts for overlapping links and subscription periods. Explain
 the documented attribution rules when comparing against total account earnings;

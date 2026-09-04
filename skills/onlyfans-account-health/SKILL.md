@@ -34,11 +34,13 @@ instead of duplicating it, and verify tool discovery before claiming setup is co
 
 ## Establish scope and retrieve evidence
 
-Use the selected creators and requested dates. For a general review with no dates,
-state a default of the last 30 complete UTC days versus the preceding 30. For
+Use the selected creators and requested dates. Use the requested timezone, or UTC
+when none is specified, and disclose it. For a general review with no dates, use
+the last 30 complete calendar days in that timezone versus the preceding 30. For
 emerging changes, also compare trailing 7/3/1-day daily averages and chatting ratios
-with the 30-day baseline. These overlapping windows are trend signals, not
-independent before/after periods. Respect a requested timezone and disclose it.
+with the 30-day baseline. Construct all windows and date comparisons in the selected
+timezone. These overlapping windows are trend signals, not independent before/after
+periods.
 
 Read [metric definitions and sources](references/metrics.md) for the metrics needed.
 Verify current inputs and response fields through the Docs MCP or
