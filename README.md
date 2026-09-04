@@ -1,45 +1,106 @@
-# OnlyFansAPI Skill
+# OnlyFans API Skills
 
-An [Agent Skill](https://agentskills.io) that lets AI coding agents query OnlyFans data and analytics through the [OnlyFansAPI.com](https://onlyfansapi.com) platform.
+Official [OnlyFansAPI.com](https://onlyfansapi.com) skills for downloading media,
+understanding account performance, planning content, summarizing fans, and building
+OnlyFans API integrations. Each skill works on its own with an Agent Skills-compatible
+AI client; install the ones that match your work.
 
-## What it does
+## Choose a skill
 
-This skill gives agents the ability to:
+| Skill | Use it to | Example request |
+| --- | --- | --- |
+| [onlyfansapi-skill](skills/onlyfansapi-skill/SKILL.md) | Use the general OnlyFans API workflow, including authentication, analytics, messaging, and MCP | “Compare net earnings across my accounts.” |
+| [onlyfans-video-downloader](skills/onlyfans-video-downloader/SKILL.md) | Save videos or archive media from connected accounts | “Download this vault video into my project folder.” |
+| [onlyfans-api-docs](skills/onlyfans-api-docs/SKILL.md) | Find endpoints, understand responses, and troubleshoot requests | “Show me how to fetch new subscriber statistics.” |
+| [onlyfans-account-health](skills/onlyfans-account-health/SKILL.md) | Diagnose revenue, acquisition, chat monetization, geography, and spending concentration | “Why did revenue dip this month?” |
+| [onlyfans-chat-summary](skills/onlyfans-chat-summary/SKILL.md) | Prepare a fan handover or recap a conversation | “Summarize this fan for the next chatter.” |
+| [onlyfans-content-planner](skills/onlyfans-content-planner/SKILL.md) | Turn message and media performance into a production plan | “What should I create next based on last month's messages?” |
+| [onlyfans-ai-chatbot](skills/onlyfans-ai-chatbot/SKILL.md) | Build a webhook-driven chatbot in your existing stack | “Build a bot that handles typing and PPV purchases without duplicate replies.” |
 
-- **Revenue summaries** — Get total earnings across all models for any time period
-- **Model performance** — Identify your top-performing model by net revenue
-- **Free Trial Link analytics** — Find which trial links have the highest subscriber-to-spender conversion rate
-- **Tracking Link analytics** — Find which tracking links convert best and generate the most revenue
-- **Earnings breakdowns** — Filter by subscriptions, tips, posts, messages, or streams
-- **Much much more** - With OnlyFansAPI.com supporting over 200+ endpoints, you're able to access absolutely anything related to OnlyFans.
+## Install
 
-All queries support multi-account (agency) workflows, automatically aggregating data across all connected models.
+List the available skills:
 
-## Setup
+```bash
+npx skills add onlyfansapi/skill --list
+```
 
-1. Sign up at [OnlyFansAPI.com](https://onlyfansapi.com) and connect your OnlyFans account(s)
-2. Create an API key at <https://app.onlyfansapi.com/api-keys>
-3. Set the environment variable:
+Install one skill, replacing the name with your choice from the table:
+
+```bash
+npx skills add onlyfansapi/skill --skill onlyfans-account-health
+```
+
+Or install the collection:
+
+```bash
+npx skills add onlyfansapi/skill --skill '*'
+```
+
+The CLI lets you choose the target agent and installation scope. Add `--global`
+for a user-wide installation, or use the default project scope. Reload your agent
+if needed for newly installed skills to appear.
+
+## Existing users: one-time migration
+
+The original `onlyfansapi-skill` keeps its name and general functionality. It now
+lives at `skills/onlyfansapi-skill/SKILL.md`, together with its own references.
+
+Existing installed copies continue working. Because the skills CLI records the
+source file path, an install pointing at the former root `SKILL.md` may not migrate
+through `skills update`. Reinstall once in the same scope and for the same agent:
+
+```bash
+# Existing project installation: run from that project
+npx skills add onlyfansapi/skill --skill onlyfansapi-skill
+
+# Existing global installation
+npx skills add onlyfansapi/skill --skill onlyfansapi-skill --global
+```
+
+Choose the same agent(s) as before and replace the existing copy when prompted.
+Review local customizations before replacement. Raw links to the old root file
+must be updated to the new path. New specialists are separate choices; updating
+the general skill does not automatically install them.
+
+There is intentionally no root `SKILL.md`: it would prevent normal CLI discovery
+of the nested collection. Each skill includes its own required files and has no
+dependency on a separately installed sibling skill.
+
+## Account access
+
+Documentation help and code generation do not require credentials. For live REST
+work, create an [OnlyFansAPI account](https://app.onlyfansapi.com), connect your
+creator account(s), and configure an [API key](https://app.onlyfansapi.com/api-keys)
+securely in the agent's environment:
 
 ```bash
 export ONLYFANSAPI_API_KEY="your_api_key_here"
 ```
 
-## Example questions
+Keep the key out of source control and frontend code. The API MCP can authenticate
+through OAuth instead. Live requests and services such as summary generation and
+exports may consume credits; the skills follow your requested scope and budget.
 
-- "What is the revenue of all my models for the past 7 days?"
-- "Which model is performing the best this month?"
-- "Which Free Trial Link has the highest conversion rate from subscribers to spenders?"
-- "Which Tracking Link made the most money?"
-- "Show me a breakdown of tip revenue vs message revenue for the past 30 days"
+## Optional MCP connections
 
-## Requirements
+When invoked in a compatible AI client, each skill checks for existing connections
+and offers to connect a relevant missing MCP server. The offer is made once per
+conversation across the skills, respects a decline, and does not block useful
+documentation or REST work.
 
-- `curl` and `jq` available on PATH
-- Network access to `app.onlyfansapi.com`
-- A valid OnlyFansAPI API key
+| Server | URL | Purpose |
+| --- | --- | --- |
+| Docs MCP | `https://docs.onlyfansapi.com/api/mcp` | Search public documentation; no authentication |
+| API MCP | `https://app.onlyfansapi.com/mcp/onlyfans-mcp` | Work with connected accounts using OAuth or an API key |
+
+Installing a skill does not automatically install MCP or authorize live account
+changes. See the [setup guide](https://docs.onlyfansapi.com/introduction/guides/develop-with-ai-agents)
+and the general skill's [MCP reference](skills/onlyfansapi-skill/references/mcp.md).
 
 ## Documentation
 
-- [OnlyFansAPI Docs](https://docs.onlyfansapi.com) — Full API reference
-- [OnlyFansAPI Console](https://app.onlyfansapi.com) — OnlyFansAPI Console Required for using the skill
+- [OnlyFans API reference](https://docs.onlyfansapi.com/api-reference)
+- [Machine-readable OpenAPI schema](https://app.onlyfansapi.com/scribe-docs/openapi.yaml)
+- [Build an OnlyFans AI chatbot](https://docs.onlyfansapi.com/onlyfans-ai/build-ai-chatbot-for-onlyfans)
+- [OnlyFansAPI Console](https://app.onlyfansapi.com)
