@@ -1,0 +1,10 @@
+{
+  "name": "onlyfansapi",
+  "version": "1.0.0",
+  "description": "Official OnlyFans API skills for account workflows and integrations.",
+  "author": {
+    "name": "OnlyFansAPI.com"
+  },
+  "homepage": "https://docs.onlyfansapi.com",
+  "repository": "https://github.com/onlyfansapi/skill"
+}

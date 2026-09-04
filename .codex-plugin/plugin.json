@@ -1,0 +1,27 @@
+{
+  "name": "onlyfansapi",
+  "version": "1.0.0",
+  "description": "OnlyFans API skills for account analytics, media downloads, fan summaries, content planning, and integrations.",
+  "author": {
+    "name": "OnlyFansAPI.com",
+    "url": "https://onlyfansapi.com"
+  },
+  "homepage": "https://docs.onlyfansapi.com",
+  "repository": "https://github.com/onlyfansapi/skill",
+  "keywords": ["onlyfans", "onlyfans-api", "analytics", "media", "chatbot"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "OnlyFans API",
+    "shortDescription": "Work with OnlyFans accounts and build API integrations.",
+    "longDescription": "Seven skills for analyzing OnlyFans account performance, downloading media, summarizing fans, planning content, finding API documentation, and building integrations. Connect your account when needed; MCP setup is optional.",
+    "developerName": "OnlyFansAPI.com",
+    "category": "Productivity",
+    "capabilities": ["Interactive"],
+    "websiteURL": "https://onlyfansapi.com",
+    "defaultPrompt": [
+      "Review my OnlyFans account performance.",
+      "Plan content based on last month's message sales.",
+      "Help me build an OnlyFans API integration."
+    ]
+  }
+}

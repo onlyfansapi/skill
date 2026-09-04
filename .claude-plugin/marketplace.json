@@ -1,0 +1,14 @@
+{
+  "name": "onlyfansapi",
+  "owner": {
+    "name": "OnlyFansAPI.com"
+  },
+  "description": "Official OnlyFans API skills.",
+  "plugins": [
+    {
+      "name": "onlyfansapi",
+      "source": "./",
+      "description": "Seven skills for working with the OnlyFans API."
+    }
+  ]
+}

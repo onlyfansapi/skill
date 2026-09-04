@@ -1,0 +1,20 @@
+{
+  "name": "onlyfansapi",
+  "interface": {
+    "displayName": "OnlyFans API"
+  },
+  "plugins": [
+    {
+      "name": "onlyfansapi",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
