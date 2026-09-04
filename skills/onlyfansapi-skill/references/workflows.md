@@ -7,12 +7,14 @@ Read the section relevant to the customer's task and its linked endpoint contrac
 - Resolve `chat_id` from [List Chats](https://docs.onlyfansapi.com/api-reference/chats/list-chats)
   or the documented event payload. Send with
   `POST /api/{account}/chats/{chat_id}/messages`; JSON `{"text":"…"}` is enough for text.
-- For PPV, set `price` and include media. Both `mediaFiles` and `previews` accept
+- For PPV, set `price` and provide nonempty `mediaFiles`; `previews` alone does not
+  satisfy the paid-media requirement. When using media IDs, include preview media
+  in `mediaFiles` as well and identify the free subset in `previews`.
+  Both `mediaFiles` and `previews` accept
   direct file uploads, `ofapi_media_…` IDs, and numeric vault IDs. `previews` also accepts
   zero-based integer indices into the direct uploads in `mediaFiles`, not into an ID-only
   array. Validate intended indices with `0 <= index < direct_upload_count`; unmatched
-  numeric values are treated as vault IDs. The API resolves previews and includes their
-  media in the full attachment list; previews identify which attachments are free.
+  numeric values are treated as vault IDs.
 - Fetching message history can mark the chat read. Detect incoming messages using
   `messages.received`; use List Chats with `filter=unread` or `unread_with_tips` for recovery.
 - Posts and mass messages use separate endpoints and completion semantics. Read those

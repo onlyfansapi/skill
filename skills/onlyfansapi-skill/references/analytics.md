@@ -66,18 +66,34 @@ loading values mean unavailable, not zero. `synchronous=true` on these listing
 endpoints waits for revenue calculation; use it when the customer needs those
 figures now, with appropriate timeouts. It is not an API-wide sync flag.
 
-`claimCounts` and `subscribersCount` come from the live OnlyFans listing;
-`revenue.spendersCount` counts distinct fans with positive stored attributed revenue
-across the link's recorded attribution history, and `revenue.total` is cached
-attributed revenue. Listing `startDate`/`endDate` filters do not scope that enrichment
-to the same period or cohort. `calculatedAt` describes cache freshness, not the
-spending window; `synchronous=true` does not change that measurement scope.
+`claimCounts` and `subscribersCount` come from the live OnlyFans listing, while
+`revenue` contains cached attribution data. Do not assume listing `startDate`/`endDate`
+filters establish a shared period or cohort for those fields. `calculatedAt` describes
+cache freshness, not the spending window; `synchronous=true` waits for calculation
+without establishing a different measurement scope.
 
-Rank by `revenue.total` for “made the most money” only when its scope matches the
-requested comparison. Otherwise label it cached revenue over recorded attribution
-history and report the requested period ranking as unavailable. For period-specific
-or cohort analysis, verify that a documented endpoint supports the required
-measurement; do not infer support from a date filter alone.
+For dated link-performance reports, use the documented stats endpoints with
+`date_start` and `date_end`:
+
+- `GET /api/{account}/trial-links/{trial_link_id}/stats`
+- `GET /api/{account}/tracking-links/{tracking_link_id}/stats`
+
+Use `data.daily_metrics` for the selected dates: its `revenue`, `subs`, `clicks`,
+and `spenders` are recorded daily increments. Sum daily revenue for a period ranking.
+`data.summary` contains cumulative totals, not totals restricted to the requested
+dates. `monthly_metrics` covers the full boundary months, so use the daily rows
+for partial-month comparisons. Daily history starts only after the account is
+connected and recording begins; disclose missing coverage rather than treating
+unrecorded history as proven zero activity.
+
+Daily `spenders` increments are not a guaranteed count of all distinct fans who
+spent within the window or among that window's new subscribers. Preserve the
+matching-population rule above before calculating conversion. For acquisition-cohort
+analysis, verify the documented cohort endpoint's measurement contract rather than
+treating a stats date filter as a cohort filter.
+
+Rank by the listing's `revenue.total` only when cached attributed revenue matches
+the requested comparison, and label its scope and freshness.
 
 Attribution also accounts for overlapping links and subscription periods. Explain
 the documented attribution rules when comparing against total account earnings;
@@ -86,7 +102,9 @@ do not add different attribution systems together as if they were disjoint reven
 Sources: [trial links](https://docs.onlyfansapi.com/api-reference/free-trial-links),
 [tracking links](https://docs.onlyfansapi.com/api-reference/tracking-links),
 [list trial links](https://docs.onlyfansapi.com/api-reference/free-trial-links/list-free-trial-links),
-[list tracking links](https://docs.onlyfansapi.com/api-reference/tracking-links/list-tracking-links).
+[list tracking links](https://docs.onlyfansapi.com/api-reference/tracking-links/list-tracking-links),
+[trial-link stats](https://docs.onlyfansapi.com/api-reference/free-trial-links/get-free-trial-link-stats),
+[tracking-link stats](https://docs.onlyfansapi.com/api-reference/tracking-links/get-tracking-link-stats).
 
 ## Smart Links
 
